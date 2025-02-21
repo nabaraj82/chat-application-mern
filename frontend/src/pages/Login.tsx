@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { axiosInstance } from "../utils/axiosConfig";
@@ -9,6 +9,12 @@ import Logo from "../assets/logo.svg";
 const Login = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState({ username: "", password: "" });
+
+  useEffect(() => {
+    if (localStorage.getItem(import.meta.env.VITE_LOCALHOST_KEY)) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
